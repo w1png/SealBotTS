@@ -1,6 +1,6 @@
 import fs = require("fs");
 
-const default_config_tempalte = `{
+const default_config_tempalte: string = `{
     "minecraft-username": "MC_EMAIL",
     "minecraft-password": "MC_PASS",
     "minecraft-server": "mc.hypixel.net",
@@ -27,8 +27,11 @@ export class Config {
     writeConfig(param: string, value: string): void {
         let config: Config = this._readConfig();
         config[param] = value;
-        fs.writeFileSync("./config.json", JSON.stringify(config, null, 4));
+        fs.writeFileSync(this.config_path, JSON.stringify(config, null, 4));
     }
 }
 
+export function createConfig(config_path: string): void {
+    fs.writeFileSync(config_path, default_config_tempalte);
+}
 
