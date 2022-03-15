@@ -1,5 +1,6 @@
 import { Client } from "discord.js";
-import {ConfigManager as ConfMan} from "./ConfigManager";
+import { ConfigManager as ConfMan } from "./ConfigManager";
+import { lurklist } from "./index"
 import * as commandModules from "./commands";
 
 const commands = Object(commandModules);
@@ -16,7 +17,7 @@ client.on("interactionCreate", async interaction => {
        return 
     }
     const { commandName } = interaction;
-   commands[commandName].execute(interaction, client); 
+    commands[commandName].execute(interaction, client); 
 });
 
 client.on("message", (message) => {
