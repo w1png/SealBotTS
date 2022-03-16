@@ -3,3 +3,5 @@ node_modules/
 *.log
 config.json
 build/
+package-lock.json
+yarn.lock

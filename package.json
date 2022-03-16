@@ -31,7 +31,9 @@
   "homepage": "https://github.com/w1png/SealBotTS#readme",
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
-    "discord.js": "13.3.1"
+    "discord.js": "^13.3.1",
+    "mineflayer": "^4.1.0",
+    "ts-postgres": "^1.2.1"
   },
   "devDependencies": {
     "concurrently": "6.4.0",

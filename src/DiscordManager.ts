@@ -1,7 +1,6 @@
 import { Client } from "discord.js";
 import { ConfigManager as ConfMan } from "./ConfigManager";
-import { lurklist } from "./index"
-import * as commandModules from "./commands";
+import * as commandModules from "./discordCommands";
 
 const commands = Object(commandModules);
 
@@ -9,7 +8,7 @@ export const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT
 const ConfigManager = new ConfMan("config.json");
 
 client.once("ready", () => {
-    console.log("Bot started!");
+    console.log("Discord bot started!");
 });
 
 client.on("interactionCreate", async interaction => {
@@ -20,7 +19,7 @@ client.on("interactionCreate", async interaction => {
     commands[commandName].execute(interaction, client); 
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
     if (message.author.bot) return;
 
 });

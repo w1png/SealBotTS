@@ -1,5 +1,6 @@
 import {ConfigManager as ConfMan} from "./ConfigManager";
-import "./bot";
+import "./DiscordManager";
+import "./MinecraftManager";
 
 export const CONFIG_PATH = "config.json";
 
