@@ -21,7 +21,14 @@ function removeColors(text: string): string {
 }
 
 function removeRanks(text: string): string {
-   return text.replace(/ *\[[^\]]*]/g, '')};
+   return text.replace(/ *\[[^\]]*]/g, '')
+};
+
+export function sendToMinecraft(text: string): void {
+   client.write("chat", {message: text}); 
+}
+
+client.on("connect", () => console.log("Minecraft client started!"));
 
 client.on('chat', function(packet: any) {
     var msg = JSON.parse(packet.message);
