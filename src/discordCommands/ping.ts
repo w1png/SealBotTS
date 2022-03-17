@@ -2,10 +2,10 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import {CommandInteraction} from "discord.js";
 
 export const data = new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Bot latency");
+  .setName("ping")
+  .setDescription("Bot latency");
 
 export async function execute(interaction: CommandInteraction) {
-    return interaction.reply("Pong!");
+  return interaction.reply("Pong!");
 }
 
