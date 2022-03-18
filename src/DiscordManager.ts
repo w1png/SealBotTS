@@ -26,7 +26,7 @@ client.on("messageCreate", (message) => {
 
   // send messages from guild bridge channel to minecraft.
   if (message.channelId == ConfigManager.config["discord-bridge-channel"] || message.channelId == ConfigManager.config["discord-officer-channel"]) {
-    var targetMinecraftChatPrefix = (message.channelId == ConfigManager.config["disord-bridge-channel"]) ? "/gc": "/oc"; 
+    var targetMinecraftChatPrefix = (message.channelId == ConfigManager.config["discord-bridge-channel"]) ? "/gc": "/oc"; 
 
     sendToMinecraft(`${targetMinecraftChatPrefix} ${message.author.username} > ${message.content.slice(0, 100 - message.author.username.length - 3)}`);
 
