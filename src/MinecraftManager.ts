@@ -49,25 +49,30 @@ client.on("chat", function (packet: any) {
           .setTimestamp()
           .setColor(color)
       );
-    } else if (msg.text == "") {
+    }else if (msg.text == "") {
       // strip colors and spaces from username and text
       username = removeColors(msg.extra[0].text).replace(/ /g, "");
       text = removeColors(msg.extra[1].text);
 
       // if guild chat
-      if (username.startsWith("Guild>")) {
+      if (username.startsWith("Guild>") || username.startsWith("Officer>")) {
+        var targetChannelId = (username.startsWith("Guild>")) ? ConfigManager.config["discord-bridge-channel"]: ConfigManager.config["discord-officer-channel"];
+
         // remove ranks from username to get plain username
-        username = removeRanks(username.slice(6).slice(0, -1));
+        username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
         
         // dont parse own messages
         if (username == ConfigManager.config["minecraft-username"]) return;
 
+        // Commands
         if (text.startsWith("!")) {
-          // parse commands here
+          let command = text.slice(1).split(" ")[0];
+          let args = text.split(" ").slice(1);
+          commands[command].execute(username, args);
         }
         // send to bridge chat if not a command
-        utils.sendEmbedToChannel(
-          ConfigManager.config["discord-bridge-channel"],
+        return utils.sendEmbedToChannel(
+          targetChannelId,
           new MessageEmbed()
             .setAuthor(username, "https://www.mc-heads.net/avatar/" + username)
             .setDescription(text)
