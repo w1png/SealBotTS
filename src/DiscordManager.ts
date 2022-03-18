@@ -26,12 +26,12 @@ client.on("messageCreate", (message) => {
 
   // send messages from guild bridge channel to minecraft.
   if (message.channelId == ConfigManager.config["discord-bridge-channel"]) {
-    sendToMinecraft(`${message.author.username} > ${message.content.slice(0, 100 - message.author.username.length - 3)}`);
+    sendToMinecraft(`/gc ${message.author.username} > ${message.content.slice(0, 100 - message.author.username.length - 3)}`);
 
     // if msg > 100 chars => send in bulks of 100 - username length - 3 (the 3 is the " > ")
     if (message.content.length > 100 - message.author.username.length)
       for (let i = 1; i <= Math.ceil(message.content.length / 100); i++)
-        sendToMinecraft(`${message.content.slice(100 - message.author.username.length - 3 + 100 * i)}`);
+        sendToMinecraft(`/gc ${message.content.slice(100 - message.author.username.length - 3 + 100 * i)}`);
   }
 });
 
