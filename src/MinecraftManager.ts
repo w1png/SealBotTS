@@ -7,6 +7,60 @@ import * as utils from "./utils";
 const commands = Object(commandModules);
 const ConfigManager = new ConfMan("config.json");
 
+// managing afking
+export interface afker {
+  username: string,
+  time: number
+}
+
+export let afklist: Array<afker> = [];
+
+// Those functions had to be created because of the spam prevention system in hypixel. It allows you to send the same message every 4 messages so we iterate through 4 different messages
+const AFK_TEXT: Array<string> = [
+  " is now afk!",
+  " is away from keyboard!",
+  " is going to be afk for some time!",
+  " is away now!",
+  " is afking now!"
+]
+let afkIter: number = 0;
+export function getAfkText(): string {
+  if (afkIter == 4) {
+    afkIter = 0;
+  } else afkIter++;
+  return AFK_TEXT[afkIter];
+}
+
+const NOT_AFK_TEXT: Array<string> = [
+  " is not afk anymore!",
+  " is near the computer again!",
+  " is not away from keyboard anymore!",
+  " is not afk!",
+  " is no longer an afker!"
+]
+let notAfkIter: number = 0;
+export function getNotAfkText(): string {
+  if (notAfkIter == 4) {
+    notAfkIter = 0;
+  } else notAfkIter++;
+  return NOT_AFK_TEXT[notAfkIter];
+}
+
+const NO_AFK_TEXT: Array<string> = [
+  "There are no people afking right now!",
+  "There is no one afk now!",
+  "The afk list is empty!",
+  "No one is afk at the moment!",
+  "There are no afkers right now!"
+]
+let noAfkIter: number = 0;
+export function getNoAfkText(): string {
+  if (noAfkIter == 4) {
+    noAfkIter = 0;
+  } else noAfkIter++;
+  return NO_AFK_TEXT[noAfkIter];
+}
+
 export var client = minecraftProtocol.createClient({
   host: ConfigManager.config["minecraft-server"],
   username: ConfigManager.config["minecraft-email"],
