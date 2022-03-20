@@ -1,6 +1,6 @@
 # SealBotTS
 
-### This a Typescript rewrite of [SealBot]([GitHub - BamBoozledMC/SealBot: Original SealBot Development. A Hypixel Guild bot that enables Guild Members to communicate between Discord and Hypixel Guild chat.](https://github.com/BamBoozledMC/sealbot)) by [@BamBoozledMC]([BamBoozledMC (Bamboozled) · GitHub](https://github.com/BamBoozledMC/)) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).
+### This a Typescript rewrite of [SealBot](https://github.com/BamBoozledMC/sealbot) by [@BamBoozledMC](https://github.com/BamBoozledMC/) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).
 
 ---
 
