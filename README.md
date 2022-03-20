@@ -7,7 +7,7 @@
 #### Installing dependencies
 
 ```bash
-$ npm install --sav-dev concurrently@6.4.0 nodemon@2.0.15 typescript@4.4.4
+$ npm install @discordjs/rest@0.3.0 discord.js@13.3.1 minecraft-protocol
 ```
 
 #### Running the bot
@@ -22,7 +22,7 @@ $ yarn start
 ###### Installing dev dependencies
 
 ```bash
-$ npm install @discordjs/rest@0.3.0 discord.js@13.3.1 minecraft-protocol
+$ npm install --sav-dev concurrently@6.4.0 nodemon@2.0.15 typescript@4.4.4
 ```
 
 ###### Running in developer mode mode
