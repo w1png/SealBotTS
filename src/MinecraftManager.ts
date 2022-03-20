@@ -25,9 +25,7 @@ const AFK_TEXT: Array<string> = [
 ]
 let afkIter: number = 0;
 export function getAfkText(): string {
-  if (afkIter == 4) {
-    afkIter = 0;
-  } else afkIter++;
+  afkIter = (afkIter == 4) ? 0: afkIter + 1;
   return AFK_TEXT[afkIter];
 }
 
@@ -40,9 +38,7 @@ const NOT_AFK_TEXT: Array<string> = [
 ]
 let notAfkIter: number = 0;
 export function getNotAfkText(): string {
-  if (notAfkIter == 4) {
-    notAfkIter = 0;
-  } else notAfkIter++;
+  notAfkIter = (notAfkIter == 4) ? 0: notAfkIter + 1;
   return NOT_AFK_TEXT[notAfkIter];
 }
 
@@ -55,9 +51,7 @@ const NO_AFK_TEXT: Array<string> = [
 ]
 let noAfkIter: number = 0;
 export function getNoAfkText(): string {
-  if (noAfkIter == 4) {
-    noAfkIter = 0;
-  } else noAfkIter++;
+  noAfkIter = (noAfkIter == 4) ? 0: noAfkIter + 1;
   return NO_AFK_TEXT[noAfkIter];
 }
 
