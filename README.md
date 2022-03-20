@@ -5,7 +5,6 @@
 ---
 
 - [SealBotTS](#sealbotts)
-        - [This a Typescript rewrite of SealBot by [@BamBoozledMC](https://github.com/BamBoozledMC/) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).](#this-a-typescript-rewrite-of-sealbot-by-bamboozledmc-that-focuses-on-ease-of-modification-and-aims-to-be-as-modular-as-possible-you-can-try-this-bot-in-action-in-boreas)
       - [Installing dependencies](#installing-dependencies)
       - [Running the bot](#running-the-bot)
       - [Contributing](#contributing)
