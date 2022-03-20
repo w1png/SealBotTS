@@ -5,13 +5,13 @@
 ---
 
 - [SealBotTS](#sealbotts)
-      - [Installing dependencies](#installing-dependencies)
-      - [Running the bot](#running-the-bot)
-      - [Contributing](#contributing)
-          - [Installing dev dependencies](#installing-dev-dependencies)
-          - [Running in developer mode mode](#running-in-developer-mode-mode)
-          - [Making discord commands](#making-discord-commands)
-          - [Making minecraft commands](#making-minecraft-commands)
+    - [Installing dependencies](#installing-dependencies)
+    - [Running the bot](#running-the-bot)
+    - [Contributing](#contributing)
+        - [Installing dev dependencies](#installing-dev-dependencies)
+        - [Running in developer mode mode](#running-in-developer-mode-mode)
+        - [Making discord commands](#making-discord-commands)
+        - [Making minecraft commands](#making-minecraft-commands)
 
 ---
 
@@ -68,9 +68,9 @@ $ yarn dev
    ```bash
    echo '\nexport * as command_name from "./command_file_name"' >> discordCommands/index.ts
    ```
-
+   
    For example:
-
+   
    ```bash
    echo '\nexport * as help from "./ping" >> discordCommands/ping.ts'
    ```
