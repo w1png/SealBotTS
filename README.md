@@ -1,6 +1,17 @@
 # SealBotTS
 
-### This a Typescript rewrite of [SealBot](https://github.com/BamBoozledMC/sealbot) by [@BamBoozledMC](https://github.com/BamBoozledMC/) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).
+##### This a Typescript rewrite of [SealBot](https://github.com/BamBoozledMC/sealbot) by [@BamBoozledMC](https://github.com/BamBoozledMC/) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).
+
+---
+
+- [SealBotTS](#sealbotts)
+    - [Installing dependencies](#installing-dependencies)
+    - [Running the bot](#running-the-bot)
+    - [Contributing](#contributing)
+        - [Installing dev dependencies](#installing-dev-dependencies)
+        - [Running in developer mode mode](#running-in-developer-mode-mode)
+        - [Making discord commands](#making-discord-commands)
+        - [Making minecraft commands](#making-minecraft-commands)
 
 ---
 
@@ -57,13 +68,12 @@ $ yarn dev
    ```bash
    echo '\nexport * as command_name from "./command_file_name"' >> discordCommands/index.ts
    ```
-   
-   
+
    For example:
-   
-   ```bash
-   echo '\nexport * as help from "./ping" >> discordCommands/ping.ts'
-   ```
+
+```bash
+echo '\nexport * as help from "./ping" >> discordCommands/ping.ts'
+```
 
 4. Register the new command
    
@@ -96,5 +106,3 @@ $ yarn dev
    ```bash
    echo '\nexport * as ping from "./ping"'
    ```
-
-
