@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 const default_config_tempalte: string = `{
-"minecraft-username": "MC_EMAIL",
+    "minecraft-username": "MC_EMAIL",
     "minecraft-password": "MC_PASS",
     "minecraft-server": "mc.hypixel.net",
     "hypixel-token": "HYPIXEL_TOKEN",
@@ -12,7 +12,7 @@ const default_config_tempalte: string = `{
     "discord-bridge-channel": "DISCORD_BRIDGE_CHANNEL",
     "discord-officer-channel": "DISCORD_OFFICER_CHANNEL",
     "discord-console-channel": "DISCORD_CONSOLE_CHANNEL",
-    "discord-refix": "=",
+    "discord-refix": "="
 }`;
 
 export class ConfigManager {
