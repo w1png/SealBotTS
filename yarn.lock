@@ -182,11 +182,6 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"array-uniq@1.0.2":
-  "integrity" "sha1-X8w3OSB3VyPP1k1lxkvvU7+eum0="
-  "resolved" "https://registry.npmjs.org/array-uniq/-/array-uniq-1.0.2.tgz"
-  "version" "1.0.2"
-
 "asn1@0.2.3":
   "integrity" "sha1-2sh4dxPJlmhJ/IGAd36+nB3fO4Y="
   "resolved" "https://registry.npmjs.org/asn1/-/asn1-0.2.3.tgz"
@@ -930,10 +925,10 @@
   "resolved" "https://registry.npmjs.org/minecraft-folder-path/-/minecraft-folder-path-1.2.0.tgz"
   "version" "1.2.0"
 
-"minecraft-protocol@^1.31.0":
-  "integrity" "sha512-KIg/SnKagSe2GtVjvWealobTkC1VLPCRYpzIZd4l+rbo3fND1e1NBmfZVsawbByYwK6/STKODkMJgk763FejTQ=="
-  "resolved" "https://registry.npmjs.org/minecraft-protocol/-/minecraft-protocol-1.32.0.tgz"
-  "version" "1.32.0"
+"minecraft-protocol@^1.31.0", "minecraft-protocol@^1.32.1":
+  "integrity" "sha512-m7FkkkGvFjTdapQgdmXhIeuNwxAofe+PvN1e7wmP6sxyaM/28XqJkTtGA+fD8WfyYaP0ESxNvTb5zxG0aGOvNg=="
+  "resolved" "https://registry.npmjs.org/minecraft-protocol/-/minecraft-protocol-1.32.1.tgz"
+  "version" "1.32.1"
   dependencies:
     "aes-js" "^3.1.2"
     "buffer-equal" "^1.0.0"
@@ -1280,19 +1275,6 @@
     "discontinuous-range" "1.0.0"
     "ret" "~0.1.10"
 
-"randombytes@2.0.3":
-  "integrity" "sha1-Z0yZdgkBw8QRJ3GjHlIdw0nMCew="
-  "resolved" "https://registry.npmjs.org/randombytes/-/randombytes-2.0.3.tgz"
-  "version" "2.0.3"
-
-"randomstring@^1.2.2":
-  "integrity" "sha512-9FByiB8guWZLbE+akdQiWE3I1I6w7Vn5El4o4y7o5bWQ6DWPcEOp+aLG7Jezc8BVRKKpgJd2ppRX0jnKu1YCfg=="
-  "resolved" "https://registry.npmjs.org/randomstring/-/randomstring-1.2.2.tgz"
-  "version" "1.2.2"
-  dependencies:
-    "array-uniq" "1.0.2"
-    "randombytes" "2.0.3"
-
 "rc@^1.2.8":
   "integrity" "sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw=="
   "resolved" "https://registry.npmjs.org/rc/-/rc-1.2.8.tgz"
@@ -1494,18 +1476,6 @@
   "resolved" "https://registry.npmjs.org/ts-mixer/-/ts-mixer-6.0.1.tgz"
   "version" "6.0.1"
 
-"ts-postgres@^1.2.1":
-  "integrity" "sha512-5cCIdGMMlX8g+cFs0DFykLKyTmPvJ9gCv5TR13R90Azz8gzEtugYq6gKm5glBXF66gtvsP/lUashU5akfQsFaA=="
-  "resolved" "https://registry.npmjs.org/ts-postgres/-/ts-postgres-1.2.1.tgz"
-  "version" "1.2.1"
-  dependencies:
-    "ts-typed-events" "^2.0.1"
-
-"ts-typed-events@^2.0.1":
-  "integrity" "sha512-7V+vCn52mZVSe+udf0L2SRkvs8BquF7xOtVktJsiyz3IGgcAhHwp3aetPcrxT5Xq23Bb/tBX0azQ6BBvPVytZg=="
-  "resolved" "https://registry.npmjs.org/ts-typed-events/-/ts-typed-events-2.0.1.tgz"
-  "version" "2.0.1"
-
 "tslib@^1.9.0":
   "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
@@ -1606,7 +1576,7 @@
   dependencies:
     "macaddress" "^0.5.1"
 
-"uuid@^8.2.0", "uuid@^8.3.0", "uuid@^8.3.2":
+"uuid@^8.2.0", "uuid@^8.3.0":
   "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
