@@ -17,3 +17,7 @@ export function getAfkUsernames(): Array<string> {
   return afkUsernames; 
 }
 
+export function removeFromAfkList(username: string): void {
+  for (let user of afklist) 
+    if (user.username == username) afklist.splice(afklist.indexOf(user), 1);
+}

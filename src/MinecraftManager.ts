@@ -90,6 +90,8 @@ client.on("chat", function (packet: any) {
       text = msg.extra[1].text;
       color = text.endsWith("joined.") ? "GREEN" : "RED";
 
+      if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
+
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()

@@ -1,13 +1,13 @@
 import { sendToMinecraft } from "../MinecraftManager";
 import { afklist, afker, getAfkText, getNotAfkText } from "../MinecraftManager"
+import { removeFromAfkList, getAfkUsernames } from "../utils";
 
 export function execute(username: string, args: Array<string>): void {
-  for (let user of afklist) {
-    if (user.username == username) {
-      afklist.splice(afklist.indexOf(user), 1);
-      return sendToMinecraft(`${username}${getNotAfkText()}`)
-    }
+  if (getAfkUsernames().includes(username)) {
+    removeFromAfkList(username);
+    return sendToMinecraft(`${username}${getNotAfkText()}`);
   }
+  
 
   let user: afker = {
     username: username,
