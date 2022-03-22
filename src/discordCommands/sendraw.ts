@@ -1,7 +1,9 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { Client, CommandInteraction, Message, TextChannel } from "discord.js";
+import { Client, CommandInteraction, GuildMember } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 import { sendToMinecraft } from "../MinecraftManager";
+import { doesMemberHaveRole } from "../utils";
+import { roles } from "../index";
 
 let ConfigManager = new ConfMan("config.ini");
 
@@ -13,6 +15,8 @@ export const data = new SlashCommandBuilder()
   );
 
 export async function execute(interaction: CommandInteraction, client: Client) {
+  doesMemberHaveRole((interaction.member as GuildMember), roles.get("bot_access")) 
+
   if (!interaction?.channelId) return;
   const channel = await client.channels.fetch(interaction.channelId);
   
