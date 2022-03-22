@@ -26,3 +26,7 @@ export function removeFromAfkList(username: string): void {
 export function doesMemberHaveRole(member: GuildMember, role_id: string | undefined): boolean {
  return (member.roles as GuildMemberRoleManager).cache.some((role) => role.id == role_id);
 }
+
+export function getNoPermissionEmbed(): MessageEmbed {
+  return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
+}

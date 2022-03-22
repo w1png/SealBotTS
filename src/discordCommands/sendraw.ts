@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { Client, CommandInteraction, GuildMember } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 import { sendToMinecraft } from "../MinecraftManager";
-import { doesMemberHaveRole } from "../utils";
+import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 import { roles } from "../index";
 
 let ConfigManager = new ConfMan("config.ini");
@@ -15,7 +15,11 @@ export const data = new SlashCommandBuilder()
   );
 
 export async function execute(interaction: CommandInteraction, client: Client) {
-  doesMemberHaveRole((interaction.member as GuildMember), roles.get("bot_access")) 
+  if (!doesMemberHaveRole((interaction.member as GuildMember), roles.get("bot_access"))) 
+    return interaction.reply({
+      embeds: [getNoPermissionEmbed()],
+      ephemeral: true
+    });
 
   if (!interaction?.channelId) return;
   const channel = await client.channels.fetch(interaction.channelId);
