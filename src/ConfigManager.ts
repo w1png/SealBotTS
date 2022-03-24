@@ -12,7 +12,7 @@ const default_config_tempalte: string = `{
     "discord-guild": "DISCORD_GUILD",
     "discord-bridge-channel": "DISCORD_BRIDGE_CHANNEL",
     "discord-officer-channel": "DISCORD_OFFICER_CHANNEL",
-    "discord-console-channel": "DISCORD_CONSOLE_CHANNEL",
+    "discord-console-channel": "DISCORD_CONSOLE_CHANNEL"
 }`;
 
 export class ConfigManager {
@@ -28,7 +28,7 @@ export class ConfigManager {
   }
 
   get config() {
-    return JSON.parse(fs.readFileSync(this.config_path, "utf-8"));
+    return JSON.parse(this.getRawConfig());
   }
 
   writeConfig(param: string, value: string): void {
