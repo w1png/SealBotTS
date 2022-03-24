@@ -5,7 +5,7 @@ import { sendToMinecraft } from "../MinecraftManager";
 import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 import { roles } from "../index";
 
-let ConfigManager = new ConfMan("config.ini");
+let ConfigManager = new ConfMan("config.json");
 
 export const data = new SlashCommandBuilder()
   .setName("sendraw")
@@ -27,7 +27,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
   if (!channel || channel.type != "GUILD_TEXT") return;
 
   const text = interaction.options.getString("text")!;
-  sendToMinecraft("text");
+  sendToMinecraft(text);
 
   interaction.reply({
     content: `"${text}" was sent to minecraft chat!`,
