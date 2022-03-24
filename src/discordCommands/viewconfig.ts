@@ -4,7 +4,7 @@ import { roles } from "../index";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 
-const ConfigManger = new ConfMan("../../config.json");
+const ConfigManger = new ConfMan("config.json");
 
 export const data = new SlashCommandBuilder()
   .setName("viewconfig") 
@@ -17,5 +17,5 @@ export async function execute(interaction: CommandInteraction) {
       ephemeral: true
     });
    
-  return interaction.reply("**Contents of *config.ini*:**\n```json\n" + ConfigManger.getRawConfig() + "\n```"); 
+  return interaction.reply("**Contents of *config.json*:**\n```json\n" + ConfigManger.getRawConfig() + "\n```"); 
 }
