@@ -86,16 +86,15 @@ client.on("chat", function (packet: any) {
   try {
     // leave/join messages
     if (msg.text == "Guild > ") {
-      username = msg.extra[0].text;
+      username = msg.extra[0].text.slice(0, -1);
       text = msg.extra[1].text;
       color = text.endsWith("joined.") ? "GREEN" : "RED";
-
       if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
 
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()
-          .setAuthor(`${username}${text}`, "https://www.mc-heads.net/avatar/" + username)
+          .setAuthor(`${username} ${text}`, "https://www.mc-heads.net/avatar/" + username)
           .setTimestamp()
           .setColor(color)
       );
