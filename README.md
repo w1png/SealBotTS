@@ -5,23 +5,21 @@
 ---
 
 - [SealBotTS](#sealbotts)
-    - [Installing dependencies](#installing-dependencies)
-    - [Running the bot](#running-the-bot)
-    - [Contributing](#contributing)
-        - [Installing dev dependencies](#installing-dev-dependencies)
-        - [Running in developer mode mode](#running-in-developer-mode-mode)
-        - [Making discord commands](#making-discord-commands)
-        - [Making minecraft commands](#making-minecraft-commands)
+     - [Installing dependencies](#installing-dependencies)
+     - [Running the bot](#running-the-bot)
+     - [Contributing](#contributing)
+          - [Installing dev dependencies](#installing-dev-dependencies)
+          - [Running in developer mode mode](#running-in-developer-mode-mode)
+          - [Making discord commands](#making-discord-commands)
+          - [Making minecraft commands](#making-minecraft-commands)
 
 ---
 
 #### Installing dependencies
 
 ```bash
-$ npm install @discordjs/rest@0.3.0 discord.js@13.3.1 minecraft-protocol
+$ npm install # Running the bot
 ```
-
-#### Running the bot
 
 ```bash
 $ yarn build
@@ -33,10 +31,8 @@ $ yarn start
 ###### Installing dev dependencies
 
 ```bash
-$ npm install --sav-dev concurrently@6.4.0 nodemon@2.0.15 typescript@4.4.4
+$ npm install --sav-dev # Running in developer mode 
 ```
-
-###### Running in developer mode mode
 
 Running the bot in developer makes the bot refresh after you make changes to files.
 
