@@ -6,6 +6,6 @@ export const data = new SlashCommandBuilder()
   .setDescription("flip a coin!");
 
 export async function execute(interaction: CommandInteraction) {
-  return interaction.reply(((Math.random() * (1 - 0) > 0.5) ? "The coin landed tails!": "The coins landed heads!"));
+  return interaction.reply(((Math.random() * (1 - 0) > 0.5) ? "The coin landed tails!": "The coin landed heads!"));
 }
 
