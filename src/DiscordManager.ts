@@ -2,6 +2,7 @@ import { Client } from "discord.js";
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
+import { checkEvents } from "./EventHandler";
 
 const commands = Object(commandModules);
 
@@ -39,4 +40,7 @@ client.on("messageCreate", (message) => {
   }
 });
 
+setInterval(() => {
+  checkEvents();
+}, 60000)
 client.login(ConfigManager.config["discord-token"]);
