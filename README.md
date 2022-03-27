@@ -18,8 +18,10 @@
 #### Installing dependencies
 
 ```bash
-$ npm install # Running the bot
+$ npm install
 ```
+
+#### Running the bot
 
 ```bash
 $ yarn build
@@ -31,8 +33,10 @@ $ yarn start
 ###### Installing dev dependencies
 
 ```bash
-$ npm install --sav-dev # Running in developer mode 
+$ npm install --sav-dev 
 ```
+
+##### Running in developer mode
 
 Running the bot in developer makes the bot refresh after you make changes to files.
 
