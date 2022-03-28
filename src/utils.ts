@@ -1,6 +1,6 @@
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import { client as discordClient } from "./DiscordManager";
-import { TextChannel, MessageEmbed } from "discord.js";
+import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
 
@@ -25,6 +25,14 @@ export function removeFromAfkList(username: string): void {
 
 export function doesMemberHaveRole(member: GuildMember, role_id: string | undefined): boolean {
   return (member.roles as GuildMemberRoleManager).cache.some((role) => role.id == role_id);
+}
+
+export function addRole(member: GuildMember, role_id: string | undefined): void {
+  member.roles.add((member.guild.roles.cache.find(role => role.id === role_id) as RoleResolvable));
+}
+
+export function removeRole(member: GuildMember, role_id: string | undefined): void {
+    member.roles.remove((member.guild.roles.cache.find(role => role.id === role_id) as RoleResolvable));
 }
 
 export function getNoPermissionEmbed(): MessageEmbed {
