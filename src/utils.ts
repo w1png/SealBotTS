@@ -30,3 +30,8 @@ export function doesMemberHaveRole(member: GuildMember, role_id: string | undefi
 export function getNoPermissionEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
 }
+
+export function timeout(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+

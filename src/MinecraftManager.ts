@@ -1,11 +1,13 @@
 import * as minecraftProtocol from "minecraft-protocol";
 import * as commandModules from "./minecraftCommands";
 import { ConfigManager as ConfMan } from "./ConfigManager";
-import { ColorResolvable, MessageEmbed, TextChannel } from "discord.js";
+import { ColorResolvable, MessageEmbed } from "discord.js";
 import * as utils from "./utils";
+import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 
 const commands = Object(commandModules);
 const ConfigManager = new ConfMan("config.json");
+const ConsoleLogger = new ConsLog();
 
 // managing afking
 export interface afker {
@@ -92,10 +94,11 @@ client.on("chat", function (packet: any) {
 
       if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
 
+      ConsoleLogger.log(`**Minecraft**: ${username} ${text}`);
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()
-          .setAuthor(`${username}${text}`, "https://www.mc-heads.net/avatar/" + username)
+          .setAuthor(`${username} ${text}`, "https://www.mc-heads.net/avatar/" + username)
           .setTimestamp()
           .setColor(color)
       );
@@ -110,7 +113,8 @@ client.on("chat", function (packet: any) {
 
         // remove ranks from username to get plain username
         username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
-        
+        ConsoleLogger.log(`**Minecraft**: [<#${targetChannelId}>] -> ${username} ${text}`); 
+
         // dont parse own messages
         if (username == ConfigManager.config["minecraft-username"]) return;
 
@@ -120,6 +124,7 @@ client.on("chat", function (packet: any) {
           let args = text.split(" ").slice(1);
           commands[command].execute(username, args);
         }
+
         // send to bridge chat if not a command
         return utils.sendEmbedToChannel(
           targetChannelId,
