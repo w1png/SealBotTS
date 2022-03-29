@@ -41,7 +41,7 @@ export async function execute(interaction: CommandInteraction) {
   } catch (PLAYER_DOES_NOT_EXIST) {
     return sendVerificationError(interaction, `Player "${username}" does not exist!`);
   }
-  for (let social of player.socialMedia){
+  for (let social of player.socialMedia) {
     if (social.id == "DISCORD") {
       if (social.link == interaction.user.tag) {
         addRole((interaction.member as GuildMember), roles.get("member"));

@@ -18,6 +18,7 @@ export interface afker {
 export let afklist: Array<afker> = [];
 
 // Those functions had to be created because of the spam prevention system in hypixel. It allows you to send the same message every 4 messages so we iterate through 4 different messages
+// TODO: refactor
 const AFK_TEXT: Array<string> = [
   " is now afk!",
   " is away from keyboard!",
@@ -69,6 +70,7 @@ function removeColors(text: string): string {
   return text.replace(/\u00A7[0-9A-FK-OR]/gi, "");
 }
 
+// TODO: remove rank not ranks
 function removeRanks(text: string): string {
   return text.replace(/ *\[[^\]]*]/g, "");
 }
@@ -77,7 +79,9 @@ export function sendToMinecraft(text: string): void {
   client.write("chat", { message: text });
 }
 
+
 client.on("connect", () => console.log("Minecraft client started!"));
+
 
 client.on("chat", function (packet: any) {
   var msg = JSON.parse(packet.message);

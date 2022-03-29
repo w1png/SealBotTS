@@ -19,7 +19,8 @@ function check_jacobs(checked_date: Date): void {
   }
 }
 
-export function checkEvents() {
+// TODO: rename to handleEvents
+export function checkEvents(): void {
   let checked_date = new Date(Date.now() + parseInt(ConfigManager.config["notif-time"]) * 60000); 
   if (ConfigManager.config["jacobs-on"] == "1") check_jacobs(checked_date);
 }

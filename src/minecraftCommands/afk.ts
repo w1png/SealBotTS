@@ -8,7 +8,6 @@ export function execute(username: string, args: Array<string>): void {
     return sendToMinecraft(`${username}${getNotAfkText()}`);
   }
   
-
   let user: afker = {
     username: username,
     time: Date.now()

@@ -9,7 +9,7 @@ const WARN = "#FFCC00";
 const ERROR = "RED";
 
 export class ConsoleLogger {
-  logError(message: string) {
+  logError(message: string): void {
     sendEmbedToChannel(
       ConfigManager.config["discord-console-channel"], 
       new MessageEmbed()
@@ -18,7 +18,8 @@ export class ConsoleLogger {
         .setColor(ERROR)
     );
   }
-  logWarn(message: string) {
+
+  logWarn(message: string): void {
      sendEmbedToChannel(
       ConfigManager.config["discord-console-channel"], 
       new MessageEmbed()
@@ -27,7 +28,8 @@ export class ConsoleLogger {
         .setColor(WARN)
     );
   }
-  log(message: string) {
+
+  log(message: string): void {
     sendTextToChannel(ConfigManager.config["discord-console-channel"], message); 
   }
 }

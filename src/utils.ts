@@ -39,7 +39,7 @@ export function getNoPermissionEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
 }
 
-export function timeout(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// export function timeout(ms: number): void {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 

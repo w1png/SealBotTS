@@ -4,7 +4,6 @@ import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
 import { checkEvents } from "./EventHandler";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
-import { timeout } from "./utils";
 
 const commands = Object(commandModules);
 
@@ -15,10 +14,12 @@ export const client = new Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 
+
 client.once("ready", () => {
   console.log("Discord bot started!");
   ConsoleLogger.log("**Discord bot started**");
 });
+
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
@@ -27,6 +28,7 @@ client.on("interactionCreate", async (interaction) => {
   ConsoleLogger.log(`**Discord**: [<#${interaction.channelId}>] <${interaction.user.username}> ${interaction.toString()}`);
   commands[commandName].execute(interaction, client);
 });
+
 
 client.on("messageCreate", async (message) => {
   // dont parse own messages
@@ -52,6 +54,8 @@ client.on("messageCreate", async (message) => {
   }
 });
 
+
+// check for events every minute
 setInterval(() => {
   checkEvents();
 }, 60000)
