@@ -7,8 +7,8 @@ import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 let ConfigManager = new ConfMan("config.json");
 let ConsoleLogger = new ConsLog();
 
-function check_jacobs(checked_date: Date): void {
-  if (checked_date.getMinutes() == 15) {
+function check_jacobs(handled_date: Date): void {
+  if (handled_date.getMinutes() == 15) {
     ConsoleLogger.log(`**Discord**: [<#${ConfigManager.config["discord-events-channel"]}>] Jacobs event notification.`);
     return sendEmbedToChannel(
       ConfigManager.config["discord-events-channel"],
@@ -19,8 +19,7 @@ function check_jacobs(checked_date: Date): void {
   }
 }
 
-// TODO: rename to handleEvents
-export function checkEvents(): void {
-  let checked_date = new Date(Date.now() + parseInt(ConfigManager.config["notif-time"]) * 60000); 
-  if (ConfigManager.config["jacobs-on"] == "1") check_jacobs(checked_date);
+export function handleEvents(): void {
+  let handled_date = new Date(Date.now() + parseInt(ConfigManager.config["notif-time"]) * 60000); 
+  if (ConfigManager.config["jacobs-on"] == "1") check_jacobs(handled_date);
 }
