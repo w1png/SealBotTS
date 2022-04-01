@@ -15,6 +15,14 @@ const default_config_tempalte: string = `{
     "discord-console-channel": "DISCORD_CONSOLE_CHANNEL"
 }`;
 
+const default_roles_template: string = `{
+    "jacobs-ping": "",
+    "bot-access": "",
+    "dev-team": "",
+    "member": "",
+    "guest": ""
+}`
+
 export class ConfigManager {
   config_path: string;
 
@@ -28,7 +36,11 @@ export class ConfigManager {
   }
 
   get config() {
-    return JSON.parse(this.getRawConfig());
+    return JSON.parse("config.json");
+  }
+
+  get roles() {
+    return JSON.parse("roles.json")
   }
 
   writeConfig(param: string, value: string): void {

@@ -1,7 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import { sendEmbedToChannel } from "./utils";
-import { roles } from "./index";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 
 let ConfigManager = new ConfMan("config.json");
@@ -14,7 +13,7 @@ function check_jacobs(handled_date: Date): void {
       ConfigManager.config["discord-events-channel"],
       new MessageEmbed()
         .setTitle("Jacobs event soon!")
-        .setDescription(`Prepare your hoes! Jacobs event starts in ${ConfigManager.config["notif-time"]} minutes!\n<@&${roles.get("jacobs_ping")}>`)
+        .setDescription(`Prepare your hoes! Jacobs event starts in ${ConfigManager.config["notif-time"]} minutes!\n<@&${ConfigManager.config["jacobs-ping"]}>`)
     );
   }
 }

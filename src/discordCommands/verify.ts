@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, GuildMember, MessageEmbed, RoleResolvable } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 import { doesMemberHaveRole, addRole } from "../utils";
-import { roles } from "../index";
 import * as Hypixel from "hypixel-api-reborn";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
 
@@ -30,7 +29,7 @@ function sendVerificationError(interaction: CommandInteraction, description: str
 }
 
 export async function execute(interaction: CommandInteraction) {
-  if (doesMemberHaveRole((interaction.member as GuildMember), roles.get("member"))) {
+  if (doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["member"])) {
     return sendVerificationError(interaction, "You are already verified! You can use /unverify to change your account!")
   }
 
@@ -44,7 +43,7 @@ export async function execute(interaction: CommandInteraction) {
   for (let social of player.socialMedia) {
     if (social.id == "DISCORD") {
       if (social.link == interaction.user.tag) {
-        addRole((interaction.member as GuildMember), roles.get("member"));
+        addRole((interaction.member as GuildMember), ConfigManager.roles["member"]);
         ConsoleLogger.log(`${interaction.user.tag} has been verified as ${username}`);
         return interaction.reply({
           embeds: [

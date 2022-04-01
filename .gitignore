@@ -7,3 +7,4 @@ package-lock.json
 yarn.lock
 .dockerignore
 Dockerfile
+roles.json

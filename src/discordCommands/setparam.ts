@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 import { getNoPermissionEmbed, doesMemberHaveRole } from "../utils";
-import { roles } from "../index";
 
 const ConfigManager = new ConfMan("config.json");
 
@@ -17,7 +16,7 @@ export const data = new SlashCommandBuilder()
   );
 
 export async function execute(interaction: CommandInteraction) {
-  if (!doesMemberHaveRole((interaction.member as GuildMember), roles.get("bot_access")))
+  if (!doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["bot-access"]))
     return interaction.reply({
       embeds: [getNoPermissionEmbed()],
       ephemeral: true,

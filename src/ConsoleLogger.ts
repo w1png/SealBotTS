@@ -1,7 +1,6 @@
 import {ConfigManager as ConfMan } from "./ConfigManager";
 import { sendEmbedToChannel, sendTextToChannel } from "./utils";
 import { MessageEmbed } from "discord.js";
-import { roles } from "./index";
 
 let ConfigManager = new ConfMan("config.json");
 
@@ -14,7 +13,7 @@ export class ConsoleLogger {
       ConfigManager.config["discord-console-channel"], 
       new MessageEmbed()
         .setTitle("Error!")
-        .setDescription(message + `\n<@&${roles.get("dev-team")}>`)
+        .setDescription(message + `\n<@&${ConfigManager.roles["dev-team"]}>`)
         .setColor(ERROR)
     );
   }
@@ -24,7 +23,7 @@ export class ConsoleLogger {
       ConfigManager.config["discord-console-channel"], 
       new MessageEmbed()
         .setTitle("Warning!")
-        .setDescription(message + `\n<@&${roles.get("dev-team")}>`)
+        .setDescription(message)
         .setColor(WARN)
     );
   }

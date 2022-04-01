@@ -57,6 +57,7 @@ client.on("messageCreate", async (message) => {
 
 // check for events every minute
 setInterval(() => {
-  checkEvents();
+  if (ConfigManager.config["events-on"])
+    checkEvents();
 }, 60000)
 client.login(ConfigManager.config["discord-token"]);
