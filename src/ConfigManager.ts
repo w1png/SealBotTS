@@ -2,7 +2,6 @@ import * as fs from "fs";
 
 const default_config_tempalte: string = `{
     "minecraft-username": "MC_EMAIL",
-    "minecraft-password": "MC_PASS",
     "minecraft-username": "MC_USERNAME",
     "minecraft-server": "mc.hypixel.net",
     "hypixel-token": "HYPIXEL_TOKEN",
@@ -35,12 +34,20 @@ export class ConfigManager {
     }
   }
 
+  getRawConfig(): string {
+    return fs.readFileSync(this.config_path, "utf-8");
+  }
+
+  getRawRoles(): string {
+    return fs.readFileSync(this.config_path, "utf-8");
+  }
+
   get config() {
-    return JSON.parse("config.json");
+    return JSON.parse(this.getRawConfig());
   }
 
   get roles() {
-    return JSON.parse("roles.json")
+    return JSON.parse(this.getRawRoles());
   }
 
   writeConfig(param: string, value: string): void {
@@ -48,9 +55,5 @@ export class ConfigManager {
 
     config[param] = value;
     fs.writeFileSync(this.config_path, JSON.stringify(config, null, 4));
-  }
-
-  getRawConfig(): string {
-    return fs.readFileSync(this.config_path, "utf-8");
   }
 }
