@@ -2,7 +2,7 @@ import { Client } from "discord.js";
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
-import { checkEvents } from "./EventHandler";
+import { handleEvents } from "./EventHandler";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 
 const commands = Object(commandModules);
