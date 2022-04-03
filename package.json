@@ -32,9 +32,11 @@
   "homepage": "https://github.com/w1png/SealBotTS#readme",
   "dependencies": {
     "@discordjs/rest": "0.3.0",
+    "@types/sqlite3": "^3.1.8",
     "discord.js": "13.3.1",
     "hypixel-api-reborn": "10.0.0",
     "minecraft-protocol": "1.32.1",
+    "sqlite3": "^5.0.2",
     "typescript-logging": "2.0.1",
     "typescript-logging-log4ts-style": "2.0.1"
   },
