@@ -23,23 +23,20 @@ const default_roles_template: string = `{
 }`
 
 export class ConfigManager {
-  config_path: string;
-
-  constructor(config_path: string) {
-    this.config_path = config_path;
+  constructor(config_path?: string) {
 
     // Create a config file if does not exist
-    if (!fs.existsSync(this.config_path)) {
-      fs.writeFileSync(config_path, default_config_tempalte);
+    if (!fs.existsSync("config.json")) {
+      fs.writeFileSync("config.json", default_config_tempalte);
     }
   }
 
   getRawConfig(): string {
-    return fs.readFileSync(this.config_path, "utf-8");
+    return fs.readFileSync("config.json", "utf-8");
   }
 
   getRawRoles(): string {
-    return fs.readFileSync(this.config_path, "utf-8");
+    return fs.readFileSync("roles.json", "utf-8");
   }
 
   get config() {
@@ -54,6 +51,7 @@ export class ConfigManager {
     let config: any = this.config;
 
     config[param] = value;
-    fs.writeFileSync(this.config_path, JSON.stringify(config, null, 4));
+    fs.writeFileSync("config.json", JSON.stringify(config, null, 4));
   }
 }
+
