@@ -5,13 +5,19 @@ const default_config_tempalte: string = `{
     "minecraft-username": "MC_USERNAME",
     "minecraft-server": "mc.hypixel.net",
     "hypixel-token": "HYPIXEL_TOKEN",
+    "hypixel-guild": "HYPIXEL_GUILD_ID"
     
     "discord-token": "BOT_TOKEN",
     "discord-client-id": "DISCORD_CLIENT_ID",
     "discord-guild": "DISCORD_GUILD",
     "discord-bridge-channel": "DISCORD_BRIDGE_CHANNEL",
     "discord-officer-channel": "DISCORD_OFFICER_CHANNEL",
-    "discord-console-channel": "DISCORD_CONSOLE_CHANNEL"
+    "discord-console-channel": "DISCORD_CONSOLE_CHANNEL",
+
+    "events-on": "1",
+    "notif-time": "5",
+    "discord-events-channel": "CHANNEL_ID",
+    "jacobs-on": "1"
 }`;
 
 const default_roles_template: string = `{
