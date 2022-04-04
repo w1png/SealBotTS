@@ -25,7 +25,10 @@ const default_roles_template: string = `{
     "bot-access": "",
     "dev-team": "",
     "member": "",
-    "guest": ""
+    "guest": "",
+    "Staff": "",
+    "Warden": "",
+    "Elite": ""
 }`
 
 export class ConfigManager {
