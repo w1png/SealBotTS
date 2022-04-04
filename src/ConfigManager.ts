@@ -35,6 +35,10 @@ export class ConfigManager {
     if (!fs.existsSync("config.json")) {
       fs.writeFileSync("config.json", default_config_tempalte);
     }
+    // Create roles if not exist
+    if (!fs.existsSync("roles.json")) {
+      fs.writeFileSync("roles.json", default_roles_template);
+    }
   }
 
   getRawConfig(): string {
