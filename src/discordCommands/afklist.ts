@@ -32,7 +32,6 @@ function getAfklistEmbed(): MessageEmbed {
 export async function execute(interaction: CommandInteraction) {
   return interaction.reply({
     embeds: [getAfklistEmbed()],
-    ephemeral:
-      [ConfigManager.config["discord-bridge-channel"], ConfigManager.config["discord-officer-channel"]].includes(interaction.channelId),
+    ephemeral: [ConfigManager.config["discord-bridge-channel"], ConfigManager.config["discord-officer-channel"]].includes(interaction.channelId),
   });
 }

@@ -5,3 +5,7 @@ config.json
 build/
 package-lock.json
 yarn.lock
+.dockerignore
+Dockerfile
+roles.json
+data.db

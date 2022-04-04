@@ -1,8 +1,11 @@
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import { client as discordClient } from "./DiscordManager";
-import { TextChannel, MessageEmbed } from "discord.js";
+import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
+import { db } from "./index";
+
+const ConfigManager = new ConfMan();
 
 export function sendTextToChannel(channelId: string, text: string): void {
   (discordClient.channels.cache.get(channelId) as TextChannel).send(text);
@@ -27,6 +30,27 @@ export function doesMemberHaveRole(member: GuildMember, role_id: string | undefi
   return (member.roles as GuildMemberRoleManager).cache.some((role) => role.id == role_id);
 }
 
+export function addRole(member: GuildMember, role_id: string | undefined): void {
+  member.roles.add((member.guild.roles.cache.find(role => role.id === role_id) as RoleResolvable));
+}
+
+export function removeRole(member: GuildMember, role_id: string | undefined): void {
+    member.roles.remove((member.guild.roles.cache.find(role => role.id === role_id) as RoleResolvable));
+}
+
 export function getNoPermissionEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
 }
+
+export async function timeout(ms: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function getDatabaseQueryResult(query: string) {
+  return new Promise((resolve, reject) => {
+      db.each(query, (err, row) => {
+        resolve(row) 
+      });
+    });
+}
+

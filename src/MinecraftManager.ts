@@ -1,11 +1,16 @@
 import * as minecraftProtocol from "minecraft-protocol";
 import * as commandModules from "./minecraftCommands";
 import { ConfigManager as ConfMan } from "./ConfigManager";
-import { ColorResolvable, MessageEmbed, TextChannel } from "discord.js";
+import { ColorResolvable, MessageEmbed, GuildMember } from "discord.js";
 import * as utils from "./utils";
+import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
+import { UserManager as UserMan } from "./UserManager"; 
+import { client as discordClient } from "./DiscordManager";
 
 const commands = Object(commandModules);
 const ConfigManager = new ConfMan("config.json");
+const ConsoleLogger = new ConsLog();
+const UserManager = new UserMan();
 
 // managing afking
 export interface afker {
@@ -16,6 +21,7 @@ export interface afker {
 export let afklist: Array<afker> = [];
 
 // Those functions had to be created because of the spam prevention system in hypixel. It allows you to send the same message every 4 messages so we iterate through 4 different messages
+// TODO: refactor
 const AFK_TEXT: Array<string> = [
   " is now afk!",
   " is away from keyboard!",
@@ -58,7 +64,6 @@ export function getNoAfkText(): string {
 export var client = minecraftProtocol.createClient({
   host: ConfigManager.config["minecraft-server"],
   username: ConfigManager.config["minecraft-email"],
-  password: ConfigManager.config["minecraft-password"],
   auth: "microsoft",
   version: "1.8.9",
 });
@@ -67,6 +72,7 @@ function removeColors(text: string): string {
   return text.replace(/\u00A7[0-9A-FK-OR]/gi, "");
 }
 
+// TODO: remove rank not ranks
 function removeRanks(text: string): string {
   return text.replace(/ *\[[^\]]*]/g, "");
 }
@@ -75,9 +81,18 @@ export function sendToMinecraft(text: string): void {
   client.write("chat", { message: text });
 }
 
-client.on("connect", () => console.log("Minecraft client started!"));
+client.on("connect", async () => {
+  console.log("Minecraft client started!");
+  await new Promise(r => setTimeout(r, 5000));
+  console.log("Sending to skyblock");
+  sendToMinecraft("/skyblock");
+  await new Promise(r => setTimeout(r, 5000));
+  console.log("Sending to personal island");
+  sendToMinecraft("/is");
+});
 
-client.on("chat", function (packet: any) {
+
+client.on("chat", async function (packet: any) {
   var msg = JSON.parse(packet.message);
   var username: string;
   var text: string;
@@ -91,6 +106,7 @@ client.on("chat", function (packet: any) {
       color = text.endsWith("joined.") ? "GREEN" : "RED";
       if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
 
+      ConsoleLogger.log(`**Minecraft**: ${username} ${text}`);
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()
@@ -98,7 +114,7 @@ client.on("chat", function (packet: any) {
           .setTimestamp()
           .setColor(color)
       );
-    }else if (msg.text == "") {
+    } else if (msg.text == "") {
       // strip colors and spaces from username and text
       username = removeColors(msg.extra[0].text).replace(/ /g, "");
       text = removeColors(msg.extra[1].text);
@@ -109,7 +125,8 @@ client.on("chat", function (packet: any) {
 
         // remove ranks from username to get plain username
         username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
-        
+        ConsoleLogger.log(`**Minecraft**: [<#${targetChannelId}>] -> ${username} ${text}`); 
+
         // dont parse own messages
         if (username == ConfigManager.config["minecraft-username"]) return;
 
@@ -119,6 +136,7 @@ client.on("chat", function (packet: any) {
           let args = text.split(" ").slice(1);
           commands[command].execute(username, args);
         }
+
         // send to bridge chat if not a command
         return utils.sendEmbedToChannel(
           targetChannelId,
@@ -129,7 +147,24 @@ client.on("chat", function (packet: any) {
             .setTimestamp()
         );
       }
-    }
+      // TODO: refactor
+    } else if (msg.extra[0].text.startsWith("was promoted") || msg.extra[0].text.startsWith("was demoted")) {
+      if (!await UserManager.getDiscordIdByMinecraftUsername(msg.text.slice(0, -1))) return;
+
+      let roleAdded = ConfigManager.roles[msg.extra[0].text.split(" to ")[1]];
+      let roleRemoved = ConfigManager.roles[msg.extra[0].text.split(" to ")[0].split(" ").at(-1)];
+
+      let username = msg.text.slice(0, -1);
+      username = "Delovashka";
+      let discord_id = await UserManager.getDiscordIdByMinecraftUsername(username) as string;
+
+      try {
+        utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(discord_id)!, roleRemoved);
+      } catch {}
+      try {
+        utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(discord_id)!, roleAdded);
+      } catch {}
+   }
   } catch {}
 });
 

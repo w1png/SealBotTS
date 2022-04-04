@@ -1,13 +1,8 @@
-import {ConfigManager as ConfMan} from "./ConfigManager";
+import * as sqlite3 from "sqlite3";
 
-export const CONFIG_PATH = "config.json";
-const ConfigManager = new ConfMan(CONFIG_PATH);
+export const db = new sqlite3.Database("data.db");
+db.run("CREATE TABLE IF NOT EXISTS users (discord_id TEXT, username TEXT)");
 
-import "./DiscordManager";
 import "./MinecraftManager";
-
-export const roles: Map<string, string> = new Map<string, string>([
-  ["bot_access", "955102304753840211"]
-  // ["bot_access", "940646053001183232"]
-]);
+import "./DiscordManager";
 

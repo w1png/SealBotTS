@@ -2,7 +2,6 @@ import * as utils from "../utils";
 import { afklist, sendToMinecraft } from "../MinecraftManager";
 import { getNoAfkText } from "../MinecraftManager";
 
-
 export function execute(username: string, args: Array<string>): void {
   if (afklist.length == 0) return sendToMinecraft(getNoAfkText());
 
