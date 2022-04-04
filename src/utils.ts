@@ -3,6 +3,9 @@ import { client as discordClient } from "./DiscordManager";
 import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
+import { db } from "./index";
+
+const ConfigManager = new ConfMan();
 
 export function sendTextToChannel(channelId: string, text: string): void {
   (discordClient.channels.cache.get(channelId) as TextChannel).send(text);
@@ -39,7 +42,15 @@ export function getNoPermissionEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
 }
 
-// export function timeout(ms: number): void {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
+export async function timeout(ms: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function getDatabaseQueryResult(query: string) {
+  return new Promise((resolve, reject) => {
+      db.each(query, (err, row) => {
+        resolve(row) 
+      });
+    });
+}
 
