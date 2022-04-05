@@ -1,14 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
-import { UserManager as UserMan, User } from "../UserManager";
 import { doesMemberHaveRole, addRole } from "../utils";
-import * as Hypixel from "hypixel-api-reborn";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
+import { hypixel } from "../MinecraftManager";
+import { createUser, User } from "../UserManager";
 
 const ConfigManager = new ConfMan();
-const UserManager = new UserMan();
-const hypixel = new Hypixel.Client(ConfigManager.config["hypixel-token"]);
 const ConsoleLogger = new ConsLog();
 
 export const data = new SlashCommandBuilder()
@@ -60,7 +58,7 @@ export async function execute(interaction: CommandInteraction) {
           username: username,
           discord_id: interaction.user.id
         };
-        UserManager.createUser(user);
+        createUser(user);
         
         ConsoleLogger.log(`${interaction.user.tag} has been verified as ${username}`);
         return interaction.reply({

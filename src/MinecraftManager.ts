@@ -1,16 +1,18 @@
 import * as minecraftProtocol from "minecraft-protocol";
 import * as commandModules from "./minecraftCommands";
 import { ConfigManager as ConfMan } from "./ConfigManager";
-import { ColorResolvable, MessageEmbed, GuildMember } from "discord.js";
+import { ColorResolvable, MessageEmbed } from "discord.js";
 import * as utils from "./utils";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
-import { UserManager as UserMan } from "./UserManager"; 
 import { client as discordClient } from "./DiscordManager";
+import * as Hypixel from "hypixel-api-reborn";
+import { getUserByMinecraftUsername } from "./UserManager";
 
 const commands = Object(commandModules);
 const ConfigManager = new ConfMan("config.json");
 const ConsoleLogger = new ConsLog();
-const UserManager = new UserMan();
+export const hypixel = new Hypixel.Client(ConfigManager.config["hypixel-token"]);
+
 
 // managing afking
 export interface afker {
@@ -126,7 +128,7 @@ client.on("chat", async function (packet: any) {
 
         // remove ranks from username to get plain username
         username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
-        ConsoleLogger.log(`**Minecraft**: [<#${targetChannelId}>] -> ${username} ${text}`); 
+        ConsoleLogger.log(`**Minecraft**: [<#${targetChannelId}>] -> ${username} ${text}`);
 
         // dont parse own messages
         if (username == ConfigManager.config["minecraft-username"]) return;
@@ -148,23 +150,23 @@ client.on("chat", async function (packet: any) {
             .setTimestamp()
         );
       }
-      // TODO: refactor
     } else if (msg.extra[0].text.startsWith("was promoted") || msg.extra[0].text.startsWith("was demoted")) {
-      if (!await UserManager.getDiscordIdByMinecraftUsername(msg.text.slice(0, -1))) return;
-
-      let roleAdded = ConfigManager.roles[msg.extra[0].text.split(" to ")[1]];
-      let roleRemoved = ConfigManager.roles[msg.extra[0].text.split(" to ")[0].split(" ").at(-1)];
-
       let username = msg.text.slice(0, -1);
-      username = "Delovashka";
-      let discord_id = await UserManager.getDiscordIdByMinecraftUsername(username) as string;
 
-      try {
-        utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(discord_id)!, roleRemoved);
-      } catch {}
-      try {
-        utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(discord_id)!, roleAdded);
-      } catch {}
+      getUserByMinecraftUsername(username)
+        .then(async (user) => {
+          if (!user) return;
+
+          let roleAdded = ConfigManager.roles[msg.extra[0].text.split(" to ")[1]];
+          let roleRemoved = ConfigManager.roles[msg.extra[0].text.split(" to ")[0].split(" ").at(-1)];
+       
+          try {
+            utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved);
+          } catch {}
+          try {
+            utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleAdded);
+          } catch {}
+        }).catch(() => {return});
    }
   } catch {}
 });

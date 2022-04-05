@@ -3,11 +3,10 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { doesMemberHaveRole, removeRole } from "../utils";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
 import { ConfigManager as ConfMan } from "../ConfigManager";
-import { UserManager as UserMan } from "../UserManager";
+import { removeUser } from "../UserManager";
 
 const ConfigManager = new ConfMan("config.json");
 const ConsoleLogger = new ConsLog();
-const UserManager = new UserMan();
 
 export const data = new SlashCommandBuilder()
   .setName("unverify")
@@ -34,7 +33,7 @@ export async function execute(interaction: CommandInteraction) {
   let isMember = doesMemberHaveRole(member, ConfigManager.roles["member"]); 
   if (isMember) {
     removeRole(member, ConfigManager.roles["member"]);
-    UserManager.removeUser(member.id);
+    removeUser(member.id);
 
     ConsoleLogger.log(`${member.user.username} is not verified now.`);
   }
