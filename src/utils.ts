@@ -3,7 +3,8 @@ import { client as discordClient } from "./DiscordManager";
 import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
-import { db } from "./index";
+import { fetchJson } from "fetch-json";
+import { hypixel } from "./MinecraftManager";
 
 const ConfigManager = new ConfMan();
 
@@ -42,15 +43,30 @@ export function getNoPermissionEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("You can not use that!").setDescription("Only staff can use this command!").setColor("RED");
 }
 
+export function getLoadingEmbed(): MessageEmbed {
+  return new MessageEmbed().setTitle("Loading...").setDescription("Please wait for this command to finish processing.\nThis usually takes up to a minute.").setColor("AQUA");
+}
+
 export async function timeout(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function getDatabaseQueryResult(query: string) {
+export async function getUsernameFromUUID(uuid: string): Promise<string> {
   return new Promise((resolve, reject) => {
-      db.each(query, (err, row) => {
-        resolve(row) 
-      });
+    fetchJson.get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`).then((response: any) => {
+      resolve(response.name);
     });
+  });
 }
 
+export async function getGuildMemberUsernameList(): Promise<Array<string>> {
+  return new Promise(async (resolve) => {
+    let guildMemberList = await hypixel.getGuild("id", ConfigManager.config["hypixel-guild"], {}).then((guild) => {return guild.members}); 
+    var guildMemberUsernameList = Array<string>();
+
+    for (let member of guildMemberList) 
+      guildMemberUsernameList.push(await getUsernameFromUUID(member.uuid));
+
+    resolve(guildMemberUsernameList);
+  });
+}

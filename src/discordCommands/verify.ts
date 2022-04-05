@@ -1,14 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 import { ConfigManager as ConfMan } from "../ConfigManager";
-import { UserManager as UserMan } from "../UserManager";
 import { doesMemberHaveRole, addRole } from "../utils";
-import * as Hypixel from "hypixel-api-reborn";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
+import { hypixel } from "../MinecraftManager";
+import { createUser, User } from "../UserManager";
 
 const ConfigManager = new ConfMan();
-const UserManager = new UserMan();
-const hypixel = new Hypixel.Client(ConfigManager.config["hypixel-token"]);
 const ConsoleLogger = new ConsLog();
 
 export const data = new SlashCommandBuilder()
@@ -55,7 +53,13 @@ export async function execute(interaction: CommandInteraction) {
     if (social.id == "DISCORD") {
       if (social.link == interaction.user.tag) {
         addRole((interaction.member as GuildMember), ConfigManager.roles["member"]);
-        UserManager.createUser(interaction.user.id, username);
+        
+        let user: User = {
+          username: username,
+          discord_id: interaction.user.id
+        };
+        createUser(user);
+        
         ConsoleLogger.log(`${interaction.user.tag} has been verified as ${username}`);
         return interaction.reply({
           embeds: [
