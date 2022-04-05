@@ -159,7 +159,7 @@ client.on("chat", async function (packet: any) {
 
           let roleAdded = ConfigManager.roles[msg.extra[0].text.split(" to ")[1]];
           let roleRemoved = ConfigManager.roles[msg.extra[0].text.split(" to ")[0].split(" ").at(-1)];
-       
+      
           try {
             utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved);
           } catch {}
