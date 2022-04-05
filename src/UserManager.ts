@@ -13,7 +13,7 @@ export async function getUserByDiscordId(discord_id: string): Promise<User | und
     db.get(`SELECT * FROM users WHERE discord_id="${discord_id}"`,(err, row) => {
       try {
         let user: User = {
-          username: row.username,
+          username: row.username.toLowerCase(),
           discord_id: row.discord_id
         }
         resolve(user);
@@ -30,7 +30,7 @@ export async function getUserByMinecraftUsername(minecraft_username: string): Pr
     db.get(`SELECT * FROM users WHERE username="${minecraft_username}"`,(err, row) => {
       try {
         let user: User = {
-          username: row.username,
+          username: row.username.toLowerCase(),
           discord_id: row.discord_id
         } 
         resolve(user);
@@ -44,7 +44,7 @@ export async function getUserByMinecraftUsername(minecraft_username: string): Pr
 
  export function createUser(user: User): void {
     ConsoleLogger.log(`<@&${user.discord_id}> was added to the database!`);
-    db.run("INSERT INTO users VALUES (?, ?)", [user.discord_id, user.username]); 
+    db.run("INSERT INTO users VALUES (?, ?)", [user.discord_id, user.username.toLowerCase()]); 
   }
 
 export function removeUser(discord_id: string): void {
