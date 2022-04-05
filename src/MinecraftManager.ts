@@ -170,7 +170,7 @@ client.on("chat", async function (packet: any) {
 
       getUserByMinecraftUsername(username)
         .then(async (user) => {
-          if (!user) return;
+	  if (!user) return;
 
           let roleAdded = ConfigManager.roles[roleText.split(" to ")[1]];
           let roleRemoved = ConfigManager.roles[roleText.split(" to ")[0].split(" ").at(-1)];

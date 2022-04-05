@@ -27,7 +27,7 @@ export async function getUserByDiscordId(discord_id: string): Promise<User | und
   
 export async function getUserByMinecraftUsername(minecraft_username: string): Promise<User | undefined> {
   return new Promise((resolve, reject) => {
-    db.get(`SELECT * FROM users WHERE username="${minecraft_username}"`,(err, row) => {
+    db.get(`SELECT * FROM users WHERE username="${minecraft_username.toLowerCase()}"`,(err, row) => {
       try {
         let user: User = {
           username: row.username.toLowerCase(),
