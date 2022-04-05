@@ -7,3 +7,4 @@ export * as coinflip from "./coinflip";
 export * as verify from "./verify";
 export * as unverify from "./unverify";
 export * as verifiedlist from "./verifiedlist";
+export * as unverifiedlist from "./unverifiedlist";
