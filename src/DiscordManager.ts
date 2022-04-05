@@ -11,7 +11,7 @@ const ConfigManager = new ConfMan("config.json");
 const ConsoleLogger = new ConsLog();
 
 export const client = new Client({
-  intents: [new Intents(32767)],
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 
 
