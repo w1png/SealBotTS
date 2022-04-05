@@ -3,7 +3,6 @@ import { client as discordClient } from "./DiscordManager";
 import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
-import { db } from "./index";
 
 const ConfigManager = new ConfMan();
 
@@ -44,13 +43,5 @@ export function getNoPermissionEmbed(): MessageEmbed {
 
 export async function timeout(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function getDatabaseQueryResult(query: string) {
-  return new Promise((resolve, reject) => {
-      db.each(query, (err, row) => {
-        resolve(row) 
-      });
-    });
 }
 
