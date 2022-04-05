@@ -172,15 +172,17 @@ client.on("chat", async function (packet: any) {
         .then(async (user) => {
 	  if (!user) return;
 
-          let roleAdded = ConfigManager.roles[roleText.split(" to ")[1]];
-          let roleRemoved = ConfigManager.roles[roleText.split(" to ")[0].split(" ").at(-1)];
+          let roleAdded = ConfigManager.roles[roleText.split(" to ")[1].toLowerCase()];
+          let roleRemoved = ConfigManager.roles[roleText.split(" to ")[0].split(" ").at(-1).toLowerCase()];
 
-          try {
-            utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved);
-          } catch {}
-          try {
-            utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleAdded);
-          } catch {}
+          if (roleAdded == ConfigManager.roles["member"]) {
+            return utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved); 
+          } else if (roleRemoved == ConfigManager.roles["member"]) {
+            return utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleAdded);
+          }
+
+          utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved);
+          utils.addRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleAdded);
         }).catch(() => {return});
    }
   } catch {}
