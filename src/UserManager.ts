@@ -8,24 +8,24 @@ export interface User {
   discord_id: string
 }
 
-export async function getUserByDiscordId(discord_id: string): Promise<User> { 
+export async function getUserByDiscordId(discord_id: string): Promise<User | undefined> { 
   return new Promise((resolve, reject) => {
     db.get(`SELECT * FROM users WHERE discord_id="${discord_id}"`,(err, row) => {
       try {
         let user: User = {
           username: row.username,
           discord_id: row.discord_id
-        } 
+        }
         resolve(user);
       } catch {
         ConsoleLogger.logWarn(`User <@&${discord_id}> was not found in the database.`);
-        reject(undefined);
+        resolve(undefined);
       } 
     });
   });
 }
   
-export async function getUserByMinecraftUsername(minecraft_username: string): Promise<User> {
+export async function getUserByMinecraftUsername(minecraft_username: string): Promise<User | undefined> {
   return new Promise((resolve, reject) => {
     db.get(`SELECT * FROM users WHERE username="${minecraft_username}"`,(err, row) => {
       try {
@@ -36,7 +36,7 @@ export async function getUserByMinecraftUsername(minecraft_username: string): Pr
         resolve(user);
       } catch {
         ConsoleLogger.logWarn(`User ${minecraft_username} was not found in the database.`);
-        reject(undefined);
+        resolve(undefined);
       }
     });
   });
