@@ -6,3 +6,4 @@ export * as sendraw from "./sendraw";
 export * as coinflip from "./coinflip";
 export * as verify from "./verify";
 export * as unverify from "./unverify";
+export * as verifiedlist from "./verifiedlist";
