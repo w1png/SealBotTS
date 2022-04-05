@@ -150,7 +150,7 @@ client.on("chat", async function (packet: any) {
         );
       }
     } else if (msg.extra[0].text.startsWith("was promoted") || msg.extra[0].text.startsWith("was demoted")) {
-      let username = msg.text.slice(0, -1);
+      let username = removeRanks(msg.text.slice(0, -1));
 
       getUserByMinecraftUsername(username)
         .then(async (user) => {
