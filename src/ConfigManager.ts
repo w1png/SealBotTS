@@ -26,9 +26,9 @@ const default_roles_template: string = `{
     "dev-team": "",
     "member": "",
     "guest": "",
-    "Staff": "",
-    "Warden": "",
-    "Elite": ""
+    "staff": "",
+    "warden": "",
+    "elite": ""
 }`
 
 export class ConfigManager {
