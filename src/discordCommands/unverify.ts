@@ -1,4 +1,4 @@
-import { CommandInteraction, GuildMember, MessageEmbed, RoleResolvable } from "discord.js";
+import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { doesMemberHaveRole, removeRole } from "../utils";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
@@ -29,12 +29,13 @@ function getUnverifiedEmbed(username: string) {
 }
 
 export async function execute(interaction: CommandInteraction) {
-  let member: GuildMember = ((interaction.member as GuildMember).permissions.has("ADMINISTRATOR") && interaction.options.getUser("user")) ? (interaction.guild?.members.cache.get(interaction.options.getUser("user")!.id) as GuildMember): (interaction.member as GuildMember)
+  let member: GuildMember = ((interaction.member as GuildMember).permissions.has("ADMINISTRATOR") && interaction.options.getUser("user")) ? (interaction.guild?.members.cache.get(interaction.options.getUser("user")!.id) as GuildMember): (interaction.member as GuildMember);
 
   let isMember = doesMemberHaveRole(member, ConfigManager.roles["member"]); 
   if (isMember) {
     removeRole(member, ConfigManager.roles["member"]);
-    UserManager.removeUser(member.id); 
+    UserManager.removeUser(member.id);
+
     ConsoleLogger.log(`${member.user.username} is not verified now.`);
   }
 
