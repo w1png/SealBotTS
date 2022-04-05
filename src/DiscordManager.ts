@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { Client, Intents } from "discord.js";
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
@@ -11,7 +11,7 @@ const ConfigManager = new ConfMan("config.json");
 const ConsoleLogger = new ConsLog();
 
 export const client = new Client({
-  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
+  intents: [new Intents(32767)],
 });
 
 
