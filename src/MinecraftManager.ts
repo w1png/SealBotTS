@@ -79,6 +79,10 @@ function removeRanks(text: string): string {
   return text.replace(/ *\[[^\]]*]/g, "");
 }
 
+function removeSpaces(text: string): string {
+  return text.replace(/\s+/g,"");
+}
+
 export function sendToMinecraft(text: string): void {
   client.write("chat", { message: text });
 }
@@ -99,7 +103,7 @@ client.on("chat", async function (packet: any) {
   var username: string;
   var text: string;
   var color: ColorResolvable;
-
+  
   try {
     // leave/join messages
     if (msg.text == "Guild > ") {
@@ -149,16 +153,28 @@ client.on("chat", async function (packet: any) {
             .setTimestamp()
         );
       }
-    } else if (msg.extra[0].text.startsWith("was promoted") || msg.extra[0].text.startsWith("was demoted")) {
-      let username = removeRanks(msg.text.slice(0, -1));
+    } else if ((msg.extra[0].text.startsWith("was promoted") || msg.extra[0].text.startsWith("was demoted")) || (Object.keys(msg.extra).length > 1 && ((msg.extra.at(-1).text.startsWith("was promoted") || msg.extra.at(-1).text.startsWith("was demoted"))))) {
+      let username = removeRanks(msg.text);
+      let roleText = msg.extra[0].text;
+
+      if (Object.keys(msg.extra).length > 1) {
+        roleText = msg.extra.at(-1).text;
+        
+        username = msg.text;
+        for (let ex of msg.extra.slice(0, -1)) {
+          username += ex.text;
+        }
+        username = removeRanks(username); 
+      }
+      username = removeSpaces(username);
 
       getUserByMinecraftUsername(username)
         .then(async (user) => {
           if (!user) return;
 
-          let roleAdded = ConfigManager.roles[msg.extra[0].text.split(" to ")[1]];
-          let roleRemoved = ConfigManager.roles[msg.extra[0].text.split(" to ")[0].split(" ").at(-1)];
-      
+          let roleAdded = ConfigManager.roles[roleText.split(" to ")[1]];
+          let roleRemoved = ConfigManager.roles[roleText.split(" to ")[0].split(" ").at(-1)];
+
           try {
             utils.removeRole(await discordClient.guilds.cache.get(ConfigManager.config["discord-guild"])?.members.fetch(user.discord_id)!, roleRemoved);
           } catch {}
