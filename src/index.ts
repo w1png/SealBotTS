@@ -6,3 +6,6 @@ db.run("CREATE TABLE IF NOT EXISTS users (discord_id TEXT, username TEXT)");
 import "./MinecraftManager";
 import "./DiscordManager";
 
+// used for uptime in /ping
+export const startedTime = Date.now();
+
