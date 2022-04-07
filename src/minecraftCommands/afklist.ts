@@ -1,9 +1,9 @@
 import * as utils from "../utils";
 import { afklist, sendToMinecraft } from "../MinecraftManager";
-import { getNoAfkText } from "../MinecraftManager";
+import { NO_AFK_TEXT, getSpamPreventionIter } from "../MinecraftManager";
 
 export function execute(username: string, args: Array<string>): void {
-  if (afklist.length == 0) return sendToMinecraft(getNoAfkText());
+  if (afklist.length == 0) return sendToMinecraft(NO_AFK_TEXT[getSpamPreventionIter()]);
 
   if (utils.getAfkUsernames().join(" ").length <= 100) sendToMinecraft(utils.getAfkUsernames().join(" "));
   

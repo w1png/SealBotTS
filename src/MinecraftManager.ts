@@ -23,44 +23,49 @@ export interface afker {
 export let afklist: Array<afker> = [];
 
 // Those functions had to be created because of the spam prevention system in hypixel. It allows you to send the same message every 4 messages so we iterate through 4 different messages
-// TODO: refactor
-const AFK_TEXT: Array<string> = [
+let spamPreventionIter = 0;
+export function getSpamPreventionIter() {
+  spamPreventionIter = (spamPreventionIter == 3) ? 0: spamPreventionIter;
+  return spamPreventionIter;
+}
+
+export const AFK_TEXT: Array<string> = [
   " is now afk!",
   " is away from keyboard!",
   " is going to be afk for some time!",
   " is away now!",
   " is afking now!"
 ]
-let afkIter: number = 0;
-export function getAfkText(): string {
-  afkIter = (afkIter == 4) ? 0: afkIter + 1;
-  return AFK_TEXT[afkIter];
-}
 
-const NOT_AFK_TEXT: Array<string> = [
+export const NOT_AFK_TEXT: Array<string> = [
   " is not afk anymore!",
   " is near the computer again!",
   " is not away from keyboard anymore!",
   " is not afk!",
   " is no longer an afker!"
 ]
-let notAfkIter: number = 0;
-export function getNotAfkText(): string {
-  notAfkIter = (notAfkIter == 4) ? 0: notAfkIter + 1;
-  return NOT_AFK_TEXT[notAfkIter];
-}
 
-const NO_AFK_TEXT: Array<string> = [
+export const NO_AFK_TEXT: Array<string> = [
   "There are no people afking right now!",
   "There is no one afk now!",
   "The afk list is empty!",
   "No one is afk at the moment!",
   "There are no afkers right now!"
 ]
-let noAfkIter: number = 0;
-export function getNoAfkText(): string {
-  noAfkIter = (noAfkIter == 4) ? 0: noAfkIter + 1;
-  return NO_AFK_TEXT[noAfkIter];
+
+export async function getPingTextList(): Promise<Array<string>> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      resolve([
+        `/gc DiscordAPI: ${discordClient.ws.ping} ms.; Hypixel: ${await utils.getHypixelPing()}; RAM: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}mb`,
+        `/gc Hypixel: ${await utils.getHypixelPing()}; DiscordAPI: ${discordClient.ws.ping} ms.; RAM: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}mb`,
+        `/gc RAM: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}mb; Hypixel: ${await utils.getHypixelPing()}; DiscordAPI: ${discordClient.ws.ping} ms. `,
+        `/gc DiscordAPI: ${discordClient.ws.ping} ms.; RAM: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}mb; Hypixel: ${await utils.getHypixelPing()}`
+      ]);
+    } catch {
+      reject(undefined);
+    }
+  });
 }
 
 export var client = minecraftProtocol.createClient({
