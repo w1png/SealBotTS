@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
 import { getUsers } from "../UserManager";
-import { doesMemberHaveRole } from "../utils";
+import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 import { ConfigManager as ConfMan } from "../ConfigManager"; 
 
 const ConfigManager = new ConfMan();
@@ -11,7 +11,8 @@ export const data = new SlashCommandBuilder()
   .setDescription("(STAFF ONLY) get all the verified user");
 
 export async function execute(interaction: CommandInteraction) {
-  if(!(doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["bot-access"]) && (interaction.member as GuildMember).permissions.has("ADMINISTRATOR"))) return;
+  if(!(doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["bot-access"]) || !(interaction.member as GuildMember).permissions.has("ADMINISTRATOR")))
+    return interaction.reply({embeds: [getNoPermissionEmbed()], ephemeral: true});
 
   getUsers().then((userList) => {
     if (userList.length == 0)

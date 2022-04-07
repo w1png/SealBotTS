@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
-import { getLoadingEmbed, getGuildMemberUsernameList, doesMemberHaveRole } from "../utils";
+import { getLoadingEmbed, getGuildMemberUsernameList, doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 import { getUserByMinecraftUsername } from "../UserManager";
 import { ConfigManager as ConfMan } from "../ConfigManager";
 
@@ -12,7 +12,9 @@ export const data = new SlashCommandBuilder()
 
 
 export async function execute(interaction: CommandInteraction) {
-  if(!(doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["bot-access"]) && (interaction.member as GuildMember).permissions.has("ADMINISTRATOR"))) return;
+  if(!(doesMemberHaveRole((interaction.member as GuildMember), ConfigManager.roles["bot-access"]) || !(interaction.member as GuildMember).permissions.has("ADMINISTRATOR")))
+    return interaction.reply({embeds: [getNoPermissionEmbed()], ephemeral: true});
+
 
   interaction.reply({
     embeds: [getLoadingEmbed()],
