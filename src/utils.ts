@@ -5,6 +5,8 @@ import { afklist } from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
 import { fetchJson } from "fetch-json";
 import { hypixel } from "./MinecraftManager";
+import { startedTime } from "./index";
+import { exec } from "child_process";
 
 const ConfigManager = new ConfMan();
 
@@ -70,3 +72,18 @@ export async function getGuildMemberUsernameList(): Promise<Array<string>> {
     resolve(guildMemberUsernameList);
   });
 }
+
+export async function getHypixelPing(): Promise<string | undefined>{
+  return new Promise((resolve, reject) => {
+    exec("echo \"$(ping -c 1 'mc.hypixel.net')\"", (error, stdout, stderr) => {
+      if (error || stderr) resolve(undefined);
+      resolve(stdout.split("\n")[1].split("time=").at(-1));
+    });
+  });
+}
+
+export function getUptime(): string {
+  let upTime = Date.now() - startedTime;
+  return `${Math.floor(upTime / 8640000)}d ${Math.floor(upTime / 360000)}h ${Math.floor(upTime / 60000)}m ${Math.floor(upTime / 1000)}s`;
+}
+
