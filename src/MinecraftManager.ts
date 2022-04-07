@@ -25,7 +25,7 @@ export let afklist: Array<afker> = [];
 // Those functions had to be created because of the spam prevention system in hypixel. It allows you to send the same message every 4 messages so we iterate through 4 different messages
 let spamPreventionIter = 0;
 export function getSpamPreventionIter() {
-  spamPreventionIter = (spamPreventionIter == 3) ? 0: spamPreventionIter;
+  spamPreventionIter = (spamPreventionIter == 3) ? 0: spamPreventionIter + 1;
   return spamPreventionIter;
 }
 
