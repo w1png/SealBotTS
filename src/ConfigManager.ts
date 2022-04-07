@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 const default_config_tempalte: string = `{
-    "minecraft-username": "MC_EMAIL",
+    "minecraft-email": "MC_EMAIL",
     "minecraft-username": "MC_USERNAME",
     "minecraft-server": "mc.hypixel.net",
     "hypixel-token": "HYPIXEL_TOKEN",
