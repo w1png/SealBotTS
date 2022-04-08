@@ -35,7 +35,7 @@ export async function execute(interaction: CommandInteraction) {
     removeRole(member, ConfigManager.roles["member"]);
     removeUser(member.id);
 
-    ConsoleLogger.log(`${member.user.username} is not verified now.`);
+    ConsoleLogger.log(`${member.toString()} is not verified now.`);
   }
 
   return interaction.reply({

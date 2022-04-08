@@ -60,12 +60,12 @@ export async function execute(interaction: CommandInteraction) {
         };
         createUser(user);
         
-        ConsoleLogger.log(`${interaction.user.tag} has been verified as ${username}`);
+        ConsoleLogger.log(`${interaction.user.toString()} has been verified as ${username}`);
         return interaction.reply({
           embeds: [
             new MessageEmbed()
               .setTitle("You have been verified!")
-              .setDescription(`Come say hello in <#${ConfigManager.config["discord-bridge-channel"]}>`)
+              .setDescription(`Come say hello in <@&${ConfigManager.config["discord-bridge-channel"]}>`)
               .setColor("GREEN")
           ],
           ephemeral: true
