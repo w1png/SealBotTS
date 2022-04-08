@@ -3,13 +3,13 @@ import * as commandModules from "./minecraftCommands";
 import { ConfigManager as ConfMan } from "./ConfigManager";
 import { ColorResolvable, MessageEmbed } from "discord.js";
 import * as utils from "./utils";
-import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 import { client as discordClient } from "./DiscordManager";
 import * as Hypixel from "hypixel-api-reborn";
 import { getUserByMinecraftUsername } from "./UserManager";
+import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 
 const commands = Object(commandModules);
-const ConfigManager = new ConfMan("config.json");
+const ConfigManager = new ConfMan();
 const ConsoleLogger = new ConsLog();
 export const hypixel = new Hypixel.Client(ConfigManager.config["hypixel-token"]);
 
@@ -117,7 +117,6 @@ client.on("chat", async function (packet: any) {
       color = text.endsWith("joined.") ? "GREEN" : "RED";
       if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
 
-      ConsoleLogger.log(`**Minecraft**: ${username} ${text}`);
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()
@@ -136,7 +135,6 @@ client.on("chat", async function (packet: any) {
 
         // remove ranks from username to get plain username
         username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
-        ConsoleLogger.log(`**Minecraft**: [<#${targetChannelId}>] -> ${username} ${text}`);
 
         // dont parse own messages
         if (username == ConfigManager.config["minecraft-username"]) return;
@@ -176,6 +174,8 @@ client.on("chat", async function (packet: any) {
       getUserByMinecraftUsername(username)
         .then(async (user) => {
 	  if (!user) return;
+          
+          ConsoleLogger.log(`**Minecraft**: ${username} (<@${await getUserByMinecraftUsername(username)}>) ${roleText}`);
 
           let roleAdded = ConfigManager.roles[roleText.split(" to ")[1].toLowerCase()];
           let roleRemoved = ConfigManager.roles[roleText.split(" to ")[0].split(" ").at(-1).toLowerCase()];
