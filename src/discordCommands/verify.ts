@@ -60,7 +60,7 @@ export async function execute(interaction: CommandInteraction) {
         };
         createUser(user);
         
-        ConsoleLogger.log(`${interaction.user.toString()} has been verified as ${username}`);
+        ConsoleLogger.log(`**System**: ${interaction.user.toString()} has been verified as ${username}`);
         return interaction.reply({
           embeds: [
             new MessageEmbed()
