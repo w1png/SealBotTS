@@ -6,7 +6,7 @@ import { GuildMemberRoleManager, GuildMember} from "discord.js";
 import { fetchJson } from "fetch-json";
 import { hypixel } from "./MinecraftManager";
 import { startedTime } from "./index";
-import { exec } from "child_process";
+
 
 const ConfigManager = new ConfMan();
 
@@ -73,7 +73,7 @@ export async function getGuildMemberUsernameList(): Promise<Array<string>> {
   });
 }
 
-export async function getHypixelPing(): Promise<string | undefined>{
+export async function getHypixelPing(): Promise<string | undefined> {
   return new Promise((resolve, reject) => {
     exec("echo \"$(ping -c 1 'mc.hypixel.net')\"", (error, stdout, stderr) => {
       if (error || stderr) resolve(undefined);
@@ -85,5 +85,9 @@ export async function getHypixelPing(): Promise<string | undefined>{
 export function getUptime(): string {
   let upTime = Date.now() - startedTime;
   return `${Math.floor(upTime / 8640000)}d ${Math.floor(upTime / 360000)}h ${Math.floor(upTime / 60000)}m ${Math.floor(upTime / 1000)}s`;
+}
+
+export function getUnexpectedErrorEmbed(): MessageEmbed {
+  return new MessageEmbed().setTitle("An unexpected error occured!").setDescription(`Please contact <@&${ConfigManager.roles["dev-team"]} if you think this wasn't supposed to happen.>`).setColor("RED");
 }
 
