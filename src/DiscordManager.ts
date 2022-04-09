@@ -37,6 +37,7 @@ client.on("messageCreate", async (message) => {
   if ([ConfigManager.config["discord-bridge-channel"], ConfigManager.config["discord-officer-channel"]].includes(message.channelId)) {
     var targetMinecraftChatPrefix = (message.channelId == ConfigManager.config["discord-bridge-channel"]) ? "/gc": "/oc"; 
 
+    var username = message.member ? message.member.nickname: message.author.username;
     var message_text = message.content;
     if (message.mentions) {
       message.mentions.members!.forEach(member => {
@@ -44,7 +45,7 @@ client.on("messageCreate", async (message) => {
       });
     }
 
-    var minecraftMessage: string = `${targetMinecraftChatPrefix} ${message.author.username} > ${message_text.slice(0, 100 - message.author.username.length - 3)}`;
+    var minecraftMessage: string = `${targetMinecraftChatPrefix} ${username} > ${message_text.slice(0, 100 - username!.length - 3)}`;
 
     // send the 1st part of the message
     sendToMinecraft(minecraftMessage);
