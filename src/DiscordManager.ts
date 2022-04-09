@@ -14,7 +14,6 @@ export const client = new Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 
-
 client.once("ready", () => {
   console.log("Discord bot started!");
   ConsoleLogger.log("**Discord bot started**");
@@ -37,7 +36,15 @@ client.on("messageCreate", async (message) => {
   // send messages from guild/officer bridge channel to minecraft.
   if ([ConfigManager.config["discord-bridge-channel"], ConfigManager.config["discord-officer-channel"]].includes(message.channelId)) {
     var targetMinecraftChatPrefix = (message.channelId == ConfigManager.config["discord-bridge-channel"]) ? "/gc": "/oc"; 
-    var minecraftMessage: string = `${targetMinecraftChatPrefix} ${message.author.username} > ${message.content.slice(0, 100 - message.author.username.length - 3)}`;
+
+    var message_text = message.content;
+    if (message.mentions) {
+      message.mentions.members!.forEach(member => {
+        message_text = message_text.replace(`<@${member.id}>`, member.nickname ? member.nickname: "unknown_name");
+      });
+    }
+
+    var minecraftMessage: string = `${targetMinecraftChatPrefix} ${message.author.username} > ${message_text.slice(0, 100 - message.author.username.length - 3)}`;
 
     // send the 1st part of the message
     sendToMinecraft(minecraftMessage);
