@@ -41,7 +41,7 @@ client.on("messageCreate", async (message) => {
     var message_text = message.content;
     if (message.mentions) {
       message.mentions.members!.forEach(member => {
-        message_text = message_text.replace(`<@${member.id}>`, member.nickname ? member.nickname: "unknown_name");
+        message_text = message_text.replace(`<@${member.id}>`, member.nickname ? `@(${member.nickname})`: "unknown_name");
       });
     }
 
