@@ -37,7 +37,7 @@ client.on("messageCreate", async (message) => {
   if ([ConfigManager.config["discord-bridge-channel"], ConfigManager.config["discord-officer-channel"]].includes(message.channelId)) {
     var targetMinecraftChatPrefix = (message.channelId == ConfigManager.config["discord-bridge-channel"]) ? "/gc": "/oc"; 
 
-    var username = message.member ? message.member.nickname: message.author.username;
+    var username = message.member ? message.member.nickname: message.author.username ? message.author.username: "unknown_name";
     var message_text = message.content;
     if (message.mentions) {
       message.mentions.members!.forEach(member => {
