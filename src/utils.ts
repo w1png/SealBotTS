@@ -6,7 +6,7 @@ import { GuildMemberRoleManager, GuildMember} from "discord.js";
 import { fetchJson } from "fetch-json";
 import { hypixel } from "./MinecraftManager";
 import { startedTime } from "./index";
-
+import { exec } from "child_process";
 
 const ConfigManager = new ConfMan();
 
