@@ -79,9 +79,8 @@ function removeColors(text: string): string {
   return text.replace(/\u00A7[0-9A-FK-OR]/gi, "");
 }
 
-// TODO: remove rank not ranks
 function removeRanks(text: string): string {
-  return text.replace(/ *\[[^\]]*]/g, "");
+  return text.replace(/ *\[[^\]]*]/, "");
 }
 
 function removeSpaces(text: string): string {
