@@ -1,5 +1,5 @@
 import { Client, Intents } from "discord.js";
-import { ConfigManager as ConfMan } from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
 import { handleEvents } from "./EventHandler";

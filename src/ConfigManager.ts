@@ -31,7 +31,7 @@ const default_roles_template: string = `{
     "elite": ""
 }`
 
-export class ConfigManager {
+export default class ConfigManager {
   constructor(config_path?: string) {
 
     // Create a config file if does not exist

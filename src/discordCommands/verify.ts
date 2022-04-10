@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 import { doesMemberHaveRole, addRole } from "../utils";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
 import { hypixel } from "../MinecraftManager";

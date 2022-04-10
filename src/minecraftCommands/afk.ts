@@ -2,7 +2,7 @@ import { sendToMinecraft } from "../MinecraftManager";
 import { afklist, NOT_AFK_TEXT, AFK_TEXT, getSpamPreventionIter, afker } from "../MinecraftManager"
 import { sendEmbedToChannel , removeFromAfkList, getAfkUsernames } from "../utils";
 import { MessageEmbed } from "discord.js";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 
 const ConfigManager = new ConfMan();
 

@@ -1,6 +1,6 @@
 import * as minecraftProtocol from "minecraft-protocol";
 import * as commandModules from "./minecraftCommands";
-import { ConfigManager as ConfMan } from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import { ColorResolvable, MessageEmbed } from "discord.js";
 import * as utils from "./utils";
 import { client as discordClient } from "./DiscordManager";

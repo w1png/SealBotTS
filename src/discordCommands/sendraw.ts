@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Client, CommandInteraction, GuildMember } from "discord.js";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 import { sendToMinecraft } from "../MinecraftManager";
 import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 

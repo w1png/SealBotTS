@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 import { afklist } from "../MinecraftManager";
 
 const ConfigManager = new ConfMan("config.json");

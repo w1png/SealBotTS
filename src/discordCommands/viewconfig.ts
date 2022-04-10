@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
 
 const ConfigManger = new ConfMan("config.json");

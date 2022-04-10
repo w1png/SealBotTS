@@ -2,7 +2,7 @@ import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { doesMemberHaveRole, removeRole } from "../utils";
 import { ConsoleLogger as ConsLog } from "../ConsoleLogger";
-import { ConfigManager as ConfMan } from "../ConfigManager";
+import ConfMan from "../ConfigManager";
 import { removeUser } from "../UserManager";
 
 const ConfigManager = new ConfMan("config.json");

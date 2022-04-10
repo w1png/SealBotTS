@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
 import { getUsers } from "../UserManager";
 import { doesMemberHaveRole, getNoPermissionEmbed } from "../utils";
-import { ConfigManager as ConfMan } from "../ConfigManager"; 
+import ConfMan from "../ConfigManager"; 
 
 const ConfigManager = new ConfMan();
 

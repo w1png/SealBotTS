@@ -1,4 +1,4 @@
-import { ConfigManager as ConfMan } from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import { client as discordClient } from "./DiscordManager";
 import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
 import { afklist } from "./MinecraftManager";

@@ -1,6 +1,6 @@
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import {ConfigManager as ConfMan} from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import * as commandModules from "./discordCommands";
  
 const ConfigManager = new ConfMan("config.json");

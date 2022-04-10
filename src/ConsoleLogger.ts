@@ -1,4 +1,4 @@
-import {ConfigManager as ConfMan } from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import { sendEmbedToChannel, sendTextToChannel } from "./utils";
 import { MessageEmbed } from "discord.js";
 

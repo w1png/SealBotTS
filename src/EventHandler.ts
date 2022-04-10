@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { ConfigManager as ConfMan } from "./ConfigManager";
+import ConfMan from "./ConfigManager";
 import { sendEmbedToChannel } from "./utils";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
 
