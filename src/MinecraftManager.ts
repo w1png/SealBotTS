@@ -136,7 +136,7 @@ client.on("chat", async function (packet: any) {
         username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
 
         // dont parse own messages
-        if (username == ConfigManager.config["minecraft-username"]) return;
+        if (username.startsWith(ConfigManager.config["minecraft-username"] + "[")) return;
 
         // Commands
         if (text.startsWith("!")) {
