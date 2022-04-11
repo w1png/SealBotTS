@@ -116,6 +116,7 @@ client.on("chat", async function (packet: any) {
       color = text.endsWith("joined.") ? "GREEN" : "RED";
       if (text.endsWith("left.") && utils.getAfkUsernames().includes(username)) utils.removeFromAfkList(username);
 
+      
       utils.sendEmbedToChannel(
         ConfigManager.config["discord-bridge-channel"],
         new MessageEmbed()
@@ -137,6 +138,8 @@ client.on("chat", async function (packet: any) {
 
         // dont parse own messages
         if (username.startsWith(ConfigManager.config["minecraft-username"] + "[")) return;
+
+        ConsoleLogger.log(`**Minecraft**: ${username}: ${text}`);
 
         // Commands
         if (text.startsWith("!")) {
