@@ -84,7 +84,7 @@ export async function getHypixelPing(): Promise<string | undefined> {
 
 export function getUptime(): string {
   let upTime = Date.now() - startedTime;
-  return `${Math.floor(upTime / 8640000)}d ${Math.floor(upTime / 360000)}h ${Math.floor(upTime / 60000)}m ${Math.floor(upTime / 1000)}s`;
+  return `${Math.floor(upTime / 86400000)}d ${Math.floor(upTime / 3600000) % 24}h ${Math.floor(upTime / 60000) % 60}m ${Math.floor(upTime / 1000) % 60}s`;
 }
 
 export function getUnexpectedErrorEmbed(): MessageEmbed {
