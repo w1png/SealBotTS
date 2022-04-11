@@ -133,7 +133,7 @@ client.on("chat", async function (packet: any) {
         var targetChannelId = (username.startsWith("Guild>")) ? ConfigManager.config["discord-bridge-channel"]: ConfigManager.config["discord-officer-channel"];
 
         // remove ranks from username to get plain username
-        username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1));
+        username = removeRanks(username.slice((username.startsWith("Guild>") ? 6: 8)).slice(0, -1).split("[").join(" ["));
 
         // dont parse own messages
         if (username.startsWith(ConfigManager.config["minecraft-username"] + "[")) return;
@@ -149,7 +149,7 @@ client.on("chat", async function (packet: any) {
         return utils.sendEmbedToChannel(
           targetChannelId,
           new MessageEmbed()
-            .setAuthor(username, "https://www.mc-heads.net/avatar/" + username)
+            .setAuthor(username, "https://www.mc-heads.net/avatar/" + username.split(" ")[0])
             .setDescription(text)
             .setColor("#ADD8E6")
             .setTimestamp()
