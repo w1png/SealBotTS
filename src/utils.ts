@@ -91,3 +91,15 @@ export function getUnexpectedErrorEmbed(): MessageEmbed {
   return new MessageEmbed().setTitle("An unexpected error occured!").setDescription(`Please contact <@&${ConfigManager.roles["dev-team"]} if you think this wasn't supposed to happen.>`).setColor("RED");
 }
 
+export function runAfkPreventionCommands(): void {
+  let functions = [
+    "/lobby",
+    "/skyblock",
+    "/is"
+  ]
+  for (command of functions) {
+    sendToMinecraft(command);
+    timeout(1000); 
+  }
+}
+

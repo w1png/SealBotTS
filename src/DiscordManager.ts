@@ -4,6 +4,7 @@ import * as commandModules from "./discordCommands";
 import { sendToMinecraft } from "./MinecraftManager";
 import { handleEvents } from "./EventHandler";
 import { ConsoleLogger as ConsLog } from "./ConsoleLogger";
+import { runAfkPreventionCommands } from "./utils";
 
 const commands = Object(commandModules);
 
@@ -68,4 +69,10 @@ setInterval(() => {
   if (ConfigManager.config["events-on"] == 1)
     handleEvents();
 }, 60000)
+
+// execute spam prevention stuff
+setInterval(() => {
+  runAfkPreventionCommands();
+}, 900000)
+
 client.login(ConfigManager.config["discord-token"]);
