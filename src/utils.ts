@@ -1,7 +1,7 @@
 import ConfMan from "./ConfigManager";
 import { client as discordClient } from "./DiscordManager";
 import { TextChannel, MessageEmbed, RoleResolvable } from "discord.js";
-import { afklist } from "./MinecraftManager";
+import { afklist, sendToMinecraft from "./MinecraftManager";
 import { GuildMemberRoleManager, GuildMember} from "discord.js";
 import { fetchJson } from "fetch-json";
 import { hypixel } from "./MinecraftManager";
