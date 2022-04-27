@@ -97,7 +97,7 @@ export function runAfkPreventionCommands(): void {
     "/skyblock",
     "/is"
   ]
-  for (command of functions) {
+  for (let command of functions) {
     sendToMinecraft(command);
     timeout(1000); 
   }
