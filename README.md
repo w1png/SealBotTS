@@ -1,3 +1,6 @@
+# ⚠️ The project is no longer used thus is not maintained anymore.
+### Thanks to [Boreas](https://discord.com/invite/6TyRJ4CQRD) hypixel guild for helping with this project :)
+
 # SealBotTS
 
 ##### This a Typescript rewrite of [SealBot](https://github.com/BamBoozledMC/sealbot) by [@BamBoozledMC](https://github.com/BamBoozledMC/) that focuses on ease of modification and aims to be as modular as possible. You can try this bot in action in [Boreas](https://discord.gg/boreas).
